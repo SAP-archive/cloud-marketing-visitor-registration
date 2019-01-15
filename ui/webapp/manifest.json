@@ -1,0 +1,150 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "sap.mkt.demo.visitor-registration-ui",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"ach": "ach",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"mainApp": {
+				"uri": "model/AppModel.json",
+				"type": "JSON"
+			},
+			"API_MKT_CORPORATE_ACCOUNT_SRV": {
+				"uri": "/mkt-destination/sap/opu/odata/sap/API_MKT_CORPORATE_ACCOUNT_SRV;v=0002/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"API_MKT_CONTACT_SRV": {
+				"uri": "/mkt-destination/sap/opu/odata/sap/API_MKT_CONTACT_SRV;v=0002/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/API_MKT_CONTACT_SRV/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "sap.mkt.demo.visitor-registration-ui.view.VisitorRegistration",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.60.1",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.mkt.demo.visitor-registration-ui.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainApp",
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"accountSrv": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "API_MKT_CORPORATE_ACCOUNT_SRV",
+				"preload": true
+			},
+			"contactSrv": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "API_MKT_CONTACT_SRV",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "sap.mkt.demo.visitor-registration-ui.view",
+				"controlAggregation": "pages",
+				"controlId": "idAppControl",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "RouteVisitorRegistration",
+					"pattern": "RouteVisitorRegistration",
+					"target": [
+						"TargetVisitorRegistration"
+					]
+				}
+			],
+			"targets": {
+				"TargetVisitorRegistration": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "VisitorRegistration"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

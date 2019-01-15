@@ -1,0 +1,50 @@
+{
+
+	"Data": {
+		"CompanyId": "",
+		"CompanyOrigin": "",
+		"CompanyName": "",
+		"CountryName": "",
+		"CityName": "",
+		"PostalCode": "",
+		"StreetName": "",
+		"HouseNumber": "",
+		"ContactId": "",
+		"ContactOrigin": "",
+		"FirstName": "",
+		"LastName": "",
+		"BirthDate": "",
+		"ContactJobTitle": "",
+		"ContactEmail": "",
+		"ContactEmailPermission": "",
+		"DayOfVisit": "",
+		"Remark": ""
+	},
+
+	"Countries": [{
+		"Country": "",
+		"CountryDescription": ""
+	}, {
+		"Country": "BE",
+		"CountryDescription": "Belgium"
+	}, {
+		"Country": "CN",
+		"CountryDescription": "China"
+	}, {
+		"Country": "FR",
+		"CountryDescription": "France"
+	}, {
+		"Country": "DE",
+		"CountryDescription": "Germany"
+	}, {
+		"Country": "IN",
+		"CountryDescription": "India"
+	}, {
+		"Country": "IR",
+		"CountryDescription": "Ireland"
+	}, {
+		"Country": "US",
+		"CountryDescription": "United States"
+	}]
+
+}

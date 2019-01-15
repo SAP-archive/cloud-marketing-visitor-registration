@@ -1,0 +1,128 @@
+<mvc:View controllerName="sap.mkt.demo.visitor-registration-ui.controller.VisitorRegistration" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>title}" contentOnlyBusy="true">
+				<headerContent>
+					<Text text="{i18n>welcome} "/>
+					<Text text="{userapi>/email}"/>
+				</headerContent>
+				<content>
+					<Panel id="p" height="100%">
+						<f:Form editable="true">
+							<f:title>
+								<core:Title text="{i18n>t_contact}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="3" emptySpanL="3"
+									emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>l_contactname}">
+											<f:fields>
+												<Input value="{/Data/FirstName}" placeholder="{i18n>plh_firstname}"/>
+												<Input value="{/Data/LastName}" placeholder="{i18n>plh_lastname}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_email}">
+											<f:fields>
+												<SearchField value="{/Data/ContactEmail}" placeholder="{i18n>plh_email}" enableSuggestions="true" search="onSearchContact"
+													suggest="onSuggestContact" suggestionItems="{contactSrv>/ContactOriginData}">
+													<suggestionItems>
+														<SuggestionItem text="{contactSrv>EmailAddress}"
+															description="{= ${contactSrv>FullName} ? ${contactSrv>FullName} : ''.concat( ${contactSrv>LastName} ).concat( ' ' ).concat( ${contactSrv>FirstName} ) }"/>
+													</suggestionItems>
+												</SearchField>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_emailnotif}">
+											<f:fields>
+												<Switch id="contPerm" type="AcceptReject" state="true"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_job}">
+											<f:fields>
+												<Input value="{/Data/ContactJobTitle}" placeholder="{i18n>plh_job}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_birthdate}">
+											<f:fields>
+												<DatePicker value="{/Data/BirthDate}" valueFormat="yyyyMMdd" displayFormat="long" placeholder="{i18n>plh_birthdate}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_visit}">
+											<f:fields>
+												<TextArea placeholder="{i18n>plh_visit}" value="{/Data/Remark}" width="100%" growing="true" growingMaxLines="7"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+						<f:Form editable="true">
+							<f:title>
+								<core:Title text="{i18n>t_company}"/>
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="3" emptySpanL="3"
+									emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement label="{i18n>l_companyname}">
+											<f:fields>
+												<SearchField id="searchField" value="{/Data/CompanyName}" placeholder="{i18n>plh_companyname}" enableSuggestions="true"
+													search="onSearchCompany" suggest="onSuggestCompany" suggestionItems="{accountSrv>/CorporateAccountOriginData}">
+													<suggestionItems>
+														<SuggestionItem text="{accountSrv>FullName}" description="{accountSrv>CityName} - {accountSrv>StreetName}"/>
+													</suggestionItems>
+												</SearchField>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_street}">
+											<f:fields>
+												<Input value="{/Data/StreetName}" placeholder="{i18n>plh_street}"/>
+												<Input value="{/Data/HouseNumber}" placeholder="{i18n>plh_houseno}">
+													<layoutData>
+														<l:GridData span="XL1 L2 M2 S12"/>
+													</layoutData>
+												</Input>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_city}">
+											<f:fields>
+												<Input value="{/Data/PostalCode}" placeholder="{i18n>plh_zip}">
+													<layoutData>
+														<l:GridData span="XL1 L2 M2 S12"/>
+													</layoutData>
+												</Input>
+												<Input value="{/Data/CityName}" placeholder="{i18n>plh_city}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>l_country}">
+											<f:fields>
+												<Select forceSelection="false" selectedKey="{/Data/CountryName}" items="{ path: '/Countries', sorter: { path: 'CountryDescription' } }">
+													<core:Item key="{CountryDescription}" text="{CountryDescription}"/>
+												</Select>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</Panel>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button type="Accept" text="{i18n>b_registervisitor}" press="sendData"/>
+						<Button text="{i18n>b_clear}" press="clearData"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

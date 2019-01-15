@@ -1,0 +1,12 @@
+#Password=<< Existing password/certificate removed on export >>
+#
+#Tue Jan 08 08:33:44 UTC 2019
+Description=CPI inbound destination for visitor-app
+Type=HTTP
+Authentication=BasicAuthentication
+WebIDEUsage=API
+Name=cpi-destination
+WebIDEEnabled=true
+URL=https\://https_endpoint_of_the_integration_flow_see_docu
+ProxyType=Internet
+User=user

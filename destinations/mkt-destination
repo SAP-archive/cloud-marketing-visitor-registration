@@ -1,0 +1,13 @@
+#Password=<< Existing password/certificate removed on export >>
+#
+#Tue Jan 08 08:33:39 UTC 2019
+Type=HTTP
+Authentication=BasicAuthentication
+WebIDEUsage=odata_gen,odata_abap
+Name=mkt-destination
+WebIDEEnabled=true
+ProxyType=Internet
+URL=https\://myxxxxxx.s4hana.ondemand.com/
+sap-client=100
+User=your_communication_user
+WebIDESystem=gateway

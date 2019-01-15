@@ -1,0 +1,66 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "application",
+        "name": "sapui5preview",
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "application",
+        "name": "sapui5preview",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/services/userapi",
+      "target": {
+        "type": "service",
+        "name": "userapi"
+      }
+    },
+    {
+      "path": "/cpi-destination",
+      "target": {
+        "type": "destination",
+        "name": "cpi-destination",
+        "entryPath": "/"
+      },
+      "description": "Http visitor data upload to CPI"
+    },
+    {
+      "path": "/mkt-destination",
+      "target": {
+        "type": "destination",
+        "name": "mkt-destination"
+      },
+      "description": "Http destination to SAP Marketing Cloud"
+    }
+  ],
+  "sendWelcomeFileRedirect": true
+}
