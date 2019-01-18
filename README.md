@@ -46,7 +46,7 @@ In future this scenario might be enhanced with:
 
 ## Support
 
-The sample app is provided "as-is", no support is guaranteed. For more information, see the SCN blog "TODO!!!!!!!!!!!!!!"(), where you can use the comment function to ask questions and provide feedback.
+The sample app is provided "as-is", no support is guaranteed. For more information, see the SCN blog [Custom App to Capture Trade Fair Contacts – Extending SAP Marketing Cloud](https://blogs.sap.com/?p=770870), where you can use the comment function to ask questions and provide feedback.
 
 ## License
 
