@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="Data" type="Data" />
+
+	<xs:complexType name="Data">
+
+		<xs:annotation>
+			<xs:documentation xml:lang="EN">
+				XSD file for account, contact and interaction data for CSV upload File used in step CSV to XML transformation in iFlow PoC
+			</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+
+			<xs:element name="Line" maxOccurs="unbounded">
+
+				<xs:complexType>
+					<xs:sequence>
+
+						<xs:annotation>
+							<xs:documentation xml:lang="EN">
+								In case of different csv file setup, change xsd, e.g. remove or add own fields.
+							</xs:documentation>
+						</xs:annotation>
+
+						<!-- account data -->
+						<xs:element name="CompanyId">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="255" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="CompanyOrigin">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="20" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="CompanyName">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="80" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<!-- account address data -->
+						<xs:element name="CountryName">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="CityName">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="PostalCode">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="10" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="StreetName">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="60" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="HouseNumber">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="10" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<!-- contact data -->
+						<xs:element name="ContactId">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="255" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="ContactOrigin">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="20" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="FirstName">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="LastName">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="BirthDate">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="((18|19|20|21|22)[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))*" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="ContactJobTitle">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="40" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+						<xs:element name="ContactEmail">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="241" />
+									<xs:pattern value="([0-9a-zA-Z_]([-.\w]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})*" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+						<xs:element name="ContactEmailPermission">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="1" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+					    <xs:element name="DayOfVisit">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="((18|19|20|21|22)[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))*" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+					    <xs:element name="Remark">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+										<xs:maxLength value="200" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+
+
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
