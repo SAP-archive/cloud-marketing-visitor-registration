@@ -42,18 +42,18 @@ In case you do not want to use the SFTP adapter yet, you can simply configure du
 
 ### Configuring the HTTPS Endpoint
 
-You can change the endpoint address of the sender HTTPS endpoint. The URL address of the endpoint is displayed after deployment of the iflow in the *Monitor* section of the SAP Cloud Platform Integration tenant. Use this address in the URL parameter of the [destination mkt-destination](#destinations) in your SAP Cloud Platform account.
+You can change the endpoint address of the sender HTTPS endpoint. The URL address of the endpoint is displayed after deployment of the iFlow in the *Monitor* section of the SAP Cloud Platform Integration tenant. Use this address in the URL parameter of the [destination mkt-destination](#destinations) in your SAP Cloud Platform account.
 
 ### Configuring Access to SAP Marketing Cloud
 
 To load the data into your SAP Marketing Cloud tenant, you must set up the outbound communication from the SAP Cloud Platform Integration tenant to your SAP Marketing Cloud tenant.
 On the configuration screen, specify the URL of your tenant in the parameter *SAPMarketingHost* on tab *More*. In addition, you must provide the necessary connection data on the tab *Receiver* for *MktSystem*. A typical value would be *Internet* for cloud systems, together with the authentication method of your choice (for example *Basic*) together with the credential name maintained in the Key Store. For more details, see [Authentication Options (Outbound)](https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/58a75377cc154f44bb81c0376d330901.html).
 
-Having configured all required parameters, you can deploy the iFlow. After successful deployment, the iFlow appears as *Started* (green) in the monitor of your integration content.
+Having configured all required parameters, you can deploy the iFlow. After successful deployment, the iFlow appears as *Started* (green) in the monitor of your integration tenant.
 
 To test it, you can directly use [postman](https://www.getpostman.com/) with a simple json payload matching the XSD definition of the iFlow. In case of no modifications, a sample payload looks as follows:
 
-<code>
+```
 	{
 
 		"CompanyId": "COMPANY-1",
@@ -76,8 +76,7 @@ To test it, you can directly use [postman](https://www.getpostman.com/) with a s
 		"Remark": "Contact uploaded via postman"
 	
 	}
-</code>
-<br>
+```
 
 Note that the HTTPS endpoint is CSRF-protected in the sample iFlow, so you need to fetch a token first via a GET call and then POST the json payload together with the authentication and token data. The data should reach your SAP Marketing Cloud tenant in three independent API calls, which can be checked in the Import Monitor of the tenant.
 
