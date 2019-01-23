@@ -1,8 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MessageBox, MessageToast) {
+], function (Controller, Filter, FilterOperator, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("sap.mkt.demo.visitor-registration-ui.controller.VisitorRegistration", {
@@ -65,8 +67,8 @@ sap.ui.define([
 			}
 
 			// add interaction day hidden (DayOfVisit) always
-			var dayOfVisit = new Date().toISOString().replace(/[-]/g, "").split("T")[0];
-			oModel.setProperty("/Data/DayOfVisit", dayOfVisit);
+			var dayOfVisitTs = new Date().toISOString();
+			oModel.setProperty("/Data/DayOfVisitTimeStampUTC", dayOfVisitTs);
 
 			// get x-csrf-token first, as cpi endpoint is csrf Protected
 			var sUrl = this.sHttpEndpoint;
@@ -118,15 +120,20 @@ sap.ui.define([
 			var value = event.getParameter("suggestValue");
 			var oSource = event.getSource();
 			var aFilters = [];
+			var aValues = [];
+			var aName = [];
+			var aCity = [];
 			if (value) {
 				// combined or filter on different fields
-				aFilters = [
-					new sap.ui.model.Filter([
-						new sap.ui.model.Filter("FullName", sap.ui.model.FilterOperator.Contains, value),
-						new sap.ui.model.Filter("CityName", sap.ui.model.FilterOperator.Contains, value),
-						new sap.ui.model.Filter("StreetName", sap.ui.model.FilterOperator.Contains, value)
-					], false)
-				];
+				aValues = value.split(" "); // try to split words if passed.
+				// until searchable Odata entity...do manually...
+				for (var i = 0, j = aValues.length; i < j; i++) {
+					aName.push(new Filter("FullName", FilterOperator.Contains, aValues[i]));
+					aCity.push(new Filter("CityName", FilterOperator.Contains, aValues[i]));
+				}
+				aName = new Filter(aName, false);
+				aCity = new Filter(aCity, false);
+				aFilters = new Filter([aName, aCity], aValues.length > 1 ); // and only if several values entered
 			}
 
 			// apply them and register for dataReceived    
@@ -143,14 +150,25 @@ sap.ui.define([
 			var value = event.getParameter("suggestValue");
 			var oSource = event.getSource();
 			var aFilters = [];
+			var aValues = [];
+			var aLastName = [];
+			var aFirstName = [];
+			var aEmail = [];
 			if (value) {
 				// combined or filter on different fields
-				aFilters = [
-					new sap.ui.model.Filter([
-						new sap.ui.model.Filter("FullName", sap.ui.model.FilterOperator.Contains, value),
-						new sap.ui.model.Filter("EmailAddress", sap.ui.model.FilterOperator.Contains, value)
-					], false)
-				];
+				aValues = value.split(" "); // try to split words if passed.
+				// FullName vs FirstName / LastName: depends also on how ContactOriginData Entity was created...
+				// until searchable Odata entity...do manually...
+				for (var i = 0, j = aValues.length; i < j; i++) {
+					aFirstName.push(new Filter("FirstName", FilterOperator.Contains, aValues[i]));
+					aLastName.push(new Filter("LastName", FilterOperator.Contains, aValues[i]));
+					aEmail.push(new Filter("EmailAddress", FilterOperator.Contains, aValues[i]));
+				}
+				aFirstName = new Filter(aFirstName, false);
+				aLastName = new Filter(aLastName, false);
+				aEmail = new Filter(aEmail, true);
+				aFilters = new Filter([aFirstName, aLastName], aValues.length > 1 ); // and if several values entered
+				aFilters = new Filter([aFilters, aEmail], false); // or
 			}
 
 			// apply them and register for dataReceived    
@@ -190,7 +208,7 @@ sap.ui.define([
 				oModel.setProperty("/Data/FirstName", oContactModel.getProperty(path + "/FirstName"));
 				oModel.setProperty("/Data/LastName", oContactModel.getProperty(path + "/LastName"));
 				var ds = oContactModel.getProperty(path + "/BirthDate");
-				ds = ds ? ds.toISOString().split("T")[0].replace(/-/g,"") : "";
+				ds = ds ? ds.toISOString().split("T")[0].replace(/-/g, "") : "";
 				oModel.setProperty("/Data/BirthDate", ds);
 				oModel.setProperty("/Data/ContactJobTitle", oContactModel.getProperty(path + "/ContactFunctionName"));
 

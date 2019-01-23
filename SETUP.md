@@ -71,8 +71,8 @@ To test it, you can directly use [postman](https://www.getpostman.com/) with a s
 		"BirthDate": "20010101",
 		"ContactJobTitle": "Postman",
 		"ContactEmail": "micky.tester@postman-upload-company.com",
-		"ContactEmailPermission": "Y",
-		"DayOfVisit": "20190101",
+		"ContactEmailPermission": "Y",		
+		"DayOfVisitTimeStampUTC": "2019-01-23T12:22:00",
 		"Remark": "Contact uploaded via postman"
 	
 	}
