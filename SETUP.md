@@ -77,7 +77,13 @@ To test it, you can directly use [postman](https://www.getpostman.com/) with a s
 	
 	}
 ```
+You can also send a flat CSV like payload to the HTTPS endpoint, as follows:
 
+```
+CompanyId;CompanyOrigin;CompanyName;CountryName;CityName;PostalCode;StreetName;HouseNumber;ContactId;ContactOrigin;FirstName;LastName;BirthDate;ContactJobTitle;ContactEmail;ContactEmailPermission;DayOfVisitTimeStampUTC;Remark
+COMPANY-1;SAP_CRM_BUPA;Postman Upload Company;United States;New York;10001;Postman Avenue;1;CONTACT-1;SAP_HYBRIS_CONSUMER;Mickey;Tester;20010101;Postman;mickey.tester@postman-upload-company.com;N;2019-01-23T08:22:00;Contact uploaded via postman
+COMPANY-2;SAP_CRM_BUPA;Postman Sending Corporation;United States;New York;10001;Postman Park;10;CONTACT-2;SAP_HYBRIS_CONSUMER;Suzi;Sender;20010203;Sender;suzi.sender@postman-corporation.com;Y;2019-01-23T10:22:00;Visit remark from file
+```
 Note that the HTTPS endpoint is CSRF-protected in the sample iFlow, so you need to fetch a token first via a GET call and then POST the json payload together with the authentication and token data. The data should reach your SAP Marketing Cloud tenant in three independent API calls, which can be checked in the Import Monitor of the tenant.
 
 ## Deployment of the UI App
