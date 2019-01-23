@@ -1,5 +1,5 @@
 #
-#Wed Dec 12 15:59:12 UTC 2018
+#Wed Jan 23 12:46:20 UTC 2019
 SFTPPostProcessing=move
 SFPTFileArchiveDirectory=.archive
 SFTPDirectory=
@@ -8,9 +8,9 @@ HTTPSCsrfProteced=1
 SFPTTimeout=10000
 SourceSystemId=CPI-Tradefair
 SAP_Mkt_Credentials=mktcredentials
-SFTPSchedule=<row><cell>yearValue</cell><cell>2019</cell></row><row><cell>dayValue</cell><cell>01</cell></row><row><cell>monthValue</cell><cell>06</cell></row><row><cell>dateType</cell><cell>ON_DATE</cell></row><row><cell>hourValue</cell><cell>12</cell></row><row><cell>minutesValue</cell><cell>36</cell></row><row><cell>timeType</cell><cell>ON_TIME</cell></row><row><cell>timeZone</cell><cell>( UTC 0\:00 ) GMT+00\:00(Etc/GMT)</cell></row><row><cell>triggerType</cell><cell>cron</cell></row><row><cell>noOfSchedules</cell><cell>1</cell></row><row><cell>schedule1</cell><cell>0+36+12+1+6+?+2019&amp;trigger.timeZone\=Etc/GMT</cell></row>
+SFTPSchedule=<row><cell>yearValue</cell><cell>2020</cell></row><row><cell>dayValue</cell><cell>01</cell></row><row><cell>monthValue</cell><cell>02</cell></row><row><cell>dateType</cell><cell>ON_DATE</cell></row><row><cell>hourValue</cell><cell>12</cell></row><row><cell>minutesValue</cell><cell>36</cell></row><row><cell>timeType</cell><cell>ON_TIME</cell></row><row><cell>timeZone</cell><cell>( UTC 0\:00 ) GMT+00\:00(Etc/GMT)</cell></row><row><cell>triggerType</cell><cell>cron</cell></row><row><cell>noOfSchedules</cell><cell>1</cell></row><row><cell>schedule1</cell><cell>0+36+12+1+2+?+2020&amp;trigger.timeZone\=Etc/GMT</cell></row>
 SFTPAuthentication=user_password
-SourceSystemType=CPI
+SourceSystemType=Cloud-Platform
 HTTPSBodySizeMax=500
 PreventXMLException=false
 SFTPMaxMessagesPerPoll=20
@@ -23,10 +23,10 @@ MailServerAddress=mail.sftp.server\:587
 MailNotification=
 CamelCharsetName=UTF-8
 MailTo=to@mail.com
-SAPMarketingHost=https\://myxxxxxx.s4hana.ondemand.com/
+SAPMarketingHost=https\://myxxxxxx-api.s4hana.ondemand.com/
 SFTPCredentials=sftpcredentials
 MailProtection=starttls_optional
 Grouping=1000
 SFTPUserName=
 MailAuthentication=loginPlain
-HTTPSAddress=/data/input
+HTTPSAddress=/demo/visitor

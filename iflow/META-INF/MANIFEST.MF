@@ -1,12 +1,11 @@
 Manifest-Version: 1.0
 SAP-BundleType: IntegrationFlow
-Bundle-Version: 1811.0.0
 SAP-RuntimeProfile: iflmap
+Bundle-Version: 1.0.0
 SAP-NodeType: IFLMAP
 Bundle-Name: tradefair-visitor-iflow
 Bundle-ManifestVersion: 2
 SAP-ArtifactTrait: 
-Bundle-SymbolicName: tradefair-visitor; singleton:=true
 Import-Package: com.sap.esb.application.services.cxf.interceptor,com.s
  ap.esb.security,com.sap.it.op.agent.api,com.sap.it.op.agent.collector
  .camel,com.sap.it.op.agent.collector.cxf,com.sap.it.op.agent.mpl,java
@@ -33,6 +32,7 @@ Import-Package: com.sap.esb.application.services.cxf.interceptor,com.s
  ,com.sap.esb.camel.endpoint.configurator.api,com.sap.esb.camel.jdbc.i
  dempotency.reorg,javax.sql,org.apache.camel.processor.idempotent.jdbc
  ,org.osgi.service.blueprint;version="[1.0.0,2.0.0)"
+Bundle-SymbolicName: tradefair-visitor-iflow; singleton:=true
 Import-Service: com.sap.esb.webservice.audit.log.AuditLogger,com.sap.e
  sb.security.KeyManagerFactory;multiple:=false,com.sap.esb.security.Tr
  ustManagerFactory;multiple:=false,javax.sql.DataSource;multiple:=fals

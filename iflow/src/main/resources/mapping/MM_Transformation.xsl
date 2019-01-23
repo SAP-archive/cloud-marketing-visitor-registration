@@ -39,6 +39,15 @@
 
 											<xsl:copy-of select="FirstName" />
 											<xsl:copy-of select="LastName" />
+										
+											<xsl:if test="BirthDate != ''">
+            									<BirthDate>
+            										<xsl:call-template name="birthdateformat">
+            											<xsl:with-param name="datestring" select="BirthDate" />
+            										</xsl:call-template>
+            									</BirthDate>
+								            </xsl:if>
+										
 											<EmailAddress>
 												<xsl:value-of select="ContactEmail" />
 											</EmailAddress>
@@ -66,6 +75,7 @@
 								<xsl:call-template name="MarketingPermissions">
 									<xsl:with-param name="PermissionID" select="ContactEmail" />
 									<xsl:with-param name="Permission" select="ContactEmailPermission" />
+									<xsl:with-param name="PermissionUTC" select="DayOfVisitTimeStampUTC" />
 									<xsl:with-param name="PermissionOrigin" select="'EMAIL'" />
 									<xsl:with-param name="CommMedium" select="'EMAIL'" />
 								</xsl:call-template>
@@ -103,6 +113,19 @@
 											<OriginDataLastChgUTCDateTime>
 												<xsl:value-of select="format-dateTime(current-dateTime(),'[Y0001]-[M01]-[D01]T[H01]:[m01]:[s]+0000')" />
 											</OriginDataLastChgUTCDateTime>
+											
+											<xsl:copy-of select="CountryName" />
+									        <ContactPostalCode>
+									            <xsl:value-of select="PostalCode"/>
+                                            </ContactPostalCode>
+											<xsl:copy-of select="CityName" />
+											<xsl:copy-of select="StreetName" />
+											
+											<AddressHouseNumber>
+                                                <xsl:value-of select="HouseNumber"/>
+                                            </AddressHouseNumber>
+                                            
+											
 										</CorporateAccountOriginData>
 									</CorporateAccountOriginData>
 								</batchChangeSetPart>
@@ -121,7 +144,7 @@
 						<xsl:for-each select="Data/Line">
 
 							<!-- condition for creating an interaction -->
-							<xsl:if test="DayOfVisit!= ''">
+							<xsl:if test="DayOfVisitTimeStampUTC!= ''">
 
 								<batchChangeSetPart>
 									<method>POST</method>
@@ -139,9 +162,7 @@
 											<CommunicationMedium>IN_PERSON</CommunicationMedium>
 											<InteractionType>APPOINTMENT</InteractionType>
 											<InteractionTimeStampUTC>
-												<xsl:call-template name="DateFormatInteraction">
-													<xsl:with-param name="datestring" select="DayOfVisit" />
-												</xsl:call-template>
+											    <xsl:value-of select="DayOfVisitTimeStampUTC" />
 											</InteractionTimeStampUTC>
 											<InteractionContent>
 												<xsl:value-of select="Remark" />
@@ -188,36 +209,17 @@
 		</headers>
 	</xsl:template>
 
-	<!-- template function for interaction date formatting: yyyymmdd -> yyyy-mm-ddT00:00:00 -->
-	<xsl:template name="DateFormatInteraction">
-		<!-- import parameter -->
-		<xsl:param name="datestring" />
-
-		<xsl:variable name="yyyy">
-			<xsl:value-of select="substring($datestring,1,4)" />
-		</xsl:variable>
-		<xsl:variable name="mm">
-			<xsl:value-of select="substring($datestring,5,2)" />
-		</xsl:variable>
-		<xsl:variable name="dd">
-			<xsl:value-of select="substring($datestring,7,2)" />
-		</xsl:variable>
-
-		<!-- return result -->
-		<xsl:value-of select="concat($yyyy,'-',$mm,'-',$dd,'T00:00:00')" />
-
-	</xsl:template>
-
 	<!-- template for Marketing Permissions segment for the different Marketing permission types -->
 	<xsl:template name="MarketingPermissions">
 
 		<xsl:param name="PermissionID" />
 		<xsl:param name="Permission" />
+		<xsl:param name="PermissionUTC" />
 		<xsl:param name="PermissionOrigin" />
 		<xsl:param name="CommMedium" />
 
 		<batchChangeSetPart>
-			<method>PUT</method>
+			<method>PATCH</method>
 			<MarketingPermissions>
 				<MarketingPermission>
 				    <ContactID>
@@ -231,6 +233,9 @@
 					<ContactPermissionOrigin>
 						<xsl:value-of select="$PermissionOrigin" />
 					</ContactPermissionOrigin>
+					<PermissionUTCDateTime>
+					    <xsl:value-of select="$PermissionUTC" />
+					</PermissionUTCDateTime>
 					<!-- permission for the marketing area assigned for contact -->
 					<MarketingArea></MarketingArea>
 					<CommunicationMedium>
@@ -245,6 +250,26 @@
 				</MarketingPermission>
 			</MarketingPermissions>
 		</batchChangeSetPart>
+	</xsl:template>
+	
+	<!-- template function for Birthdate formatting: yyyymmdd -> yyyy-mm-dd'T00:00:00' -->
+	<xsl:template name="birthdateformat">
+		<!-- import parameter -->
+		<xsl:param name="datestring" />
+
+		<xsl:variable name="yyyy">
+			<xsl:value-of select="substring($datestring,1,4)" />
+		</xsl:variable>
+		<xsl:variable name="mm">
+			<xsl:value-of select="substring($datestring,5,2)" />
+		</xsl:variable>
+		<xsl:variable name="dd">
+			<xsl:value-of select="substring($datestring,7,2)" />
+		</xsl:variable>
+		<xsl:variable name="apos" select='"&apos;"' />
+		<!-- return result -->
+		<xsl:value-of select="concat($yyyy,'-',$mm,'-',$dd,$apos,'T00:00:00')" />
+
 	</xsl:template>
 
 
