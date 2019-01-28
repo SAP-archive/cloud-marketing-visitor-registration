@@ -48,7 +48,7 @@ In future this scenario might be enhanced with:
 
 The sample app is provided "as-is", no support is guaranteed. 
 
-For more information, see the SCN blog [Custom App to Capture Trade Fair Contacts – Extending SAP Marketing Cloud](https://blogs.sap.com/?p=770870), where you can use the comment function to ask questions.
+For more information, see the SCN blog [Custom App to Capture Trade Fair Contacts – Extending SAP Marketing Cloud](https://blogs.sap.com/2019/01/27/custom-app-to-capture-trade-fair-contacts-extending-sap-marketing-cloud/), where you can use the comment function to ask questions.
 
 ## License
 
