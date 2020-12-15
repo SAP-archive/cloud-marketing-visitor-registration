@@ -1,3 +1,8 @@
+![](https://img.shields.io/badge/STATUS-NOT%20CURRENTLY%20MAINTAINED-red.svg?longCache=true&style=flat)
+
+# Important Notice
+This public repository is read-only and no longer maintained.
+
 # Visitor Registration App
 
 This app showcases an extension for SAP Marketing Cloud to provide a scenario that is not available in standard. 
